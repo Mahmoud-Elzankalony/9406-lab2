@@ -1,4 +1,3 @@
-
 while [ 1 ]
 do
     files=()
@@ -43,6 +42,7 @@ then
     cp "$2/${files[$((num - 1))]}" "$1/${files[$((num - 1))]}"
     rm "$2/${files[$((num - 1))]}"
     echo "Restored ${files[$((num - 1))]} to $1."
+    echo "${files[$((num - 1))]}" >>  Whitelist.txt
 elif [ "$input" -eq 2 ]
 then
     rm "$2/${files[$((num - 1))]}"

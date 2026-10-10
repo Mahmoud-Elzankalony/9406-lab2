@@ -5,6 +5,11 @@ Flagged_content=("virus" "trojan" "malware" "worm" "ransomware")
 for file in $1/*
 do
 filename="${file##*/}"
+cat Whitelist.txt | grep -q "$filename"
+if [ $? -eq 0 ] 
+then
+continue
+fi
 ex="${filename##*.}"
 	for extension in "${Flagged_extension[@]}"
 	do
@@ -25,6 +30,12 @@ grep -i -q "$item" "$file"
 if [ $? -eq 0 ]
 then
         filename="${file##*/}"
+	cat Whitelist.txt | grep -q "$filename"
+if [ $? -eq 0 ] 
+then
+continue
+fi
+
         cp "$1/$filename" "$2/$filename"
         rm "$file"
 
